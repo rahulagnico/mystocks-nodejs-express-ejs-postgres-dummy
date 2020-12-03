@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Stocks | Home</title>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark">
+            <!-- Brand -->
+            <a class="navbar-brand" href="/">My Stocks | Home</a>
+
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <form action="/logout" method="post">
+                            <button type="submit" class="btn btn-sm btn-secondary">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <div id="fullBodyLoader" class="full-body-loader">
+            <img class="loader-img" src="/images/loader.gif" />
+        </div>
+
+        <div class="modal fade" id="buyStockModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="buyStockModalTitle"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="stockPrice"></p>
+                        Quantity :
+                        <input id="stockQuantity" value="1" min="1" type="number"/>
+                        <input type="hidden" id="stockId"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="buyNow">Buy Now</button>
+                        <button type="button" class="btn btn-primary" id="sellNow">Sell Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+
+            <div class="row main-row">
+
+                <div class="col-lg-12">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link text-muted active" id="wallet-tab" data-toggle="tab" href="#wallet"
+                                role="tab" aria-controls="wallet" aria-selected="true">Wallet</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-muted" id="buy-stock-tab" data-toggle="tab" href="#buyStock"
+                                role="tab" aria-controls="buyStock" aria-selected="false">Buy Stock</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-muted" id="sell-stock-tab" data-toggle="tab" href="#sellStock"
+                                role="tab" aria-controls="sellStock" aria-selected="false">Sell Stock</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="wallet" role="tabpanel" aria-labelledby="wallet-tab">
+                            <table class="table text-white">
+                                <tr>
+                                    <th>Balance</th>
+                                    <td id="walletBalance" class="text-success"></td>
+                                </tr>
+                                <tr>
+                                    <th>Invested</th>
+                                    <td id="walletInvested" class="text-warning"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="buyStock" role="tabpanel" aria-labelledby="buy-stock-tab">
+                            <div class="stocks-table-container">
+                                <table id="stocksTable" class="table compact">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            <th>Currency</th>
+                                            <th>Price (USD)</th>
+                                            <th>fsym_id</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="sellStock" role="tabpanel" aria-labelledby="sell-stock-tab">
+                            <div class="stocks-holdings-container">
+                                <table id="stockHoldingsTable" class="table compact">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            <th>Currency</th>
+                                            <th>Price (USD)</th>
+                                            <th>Quantity</th>
+                                            <th>fsym_id</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <script src="/js/home.js"></script>
+</body>
+
+</html>

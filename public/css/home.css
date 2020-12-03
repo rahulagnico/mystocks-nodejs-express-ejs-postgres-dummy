@@ -1,0 +1,83 @@
+:root {
+    --input-padding-x: 1.5rem;
+    --input-padding-y: .75rem;
+  }
+  
+  body {
+    background-image: url("/images/1393728_edit.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  
+  .navbar{
+    background-color: rgba(0,0,0, 0.5);
+  }
+  
+  .main-row {
+    padding-top:2vh;
+    width: 100%;
+  }
+  
+  .success-msg{
+    color:green;
+  }
+  .err-msg{
+    color:red;
+  }
+
+  .odd{
+    background-color: rgba(17, 17, 17, 0.788) !important;
+    color:whitesmoke !important;
+  }
+ .even{
+  background-color: rgba(17, 17, 17, 0.945) !important;
+  color: whitesmoke !important;
+ } 
+ thead{
+   background-color:black !important;
+   color:whitesmoke !important;
+ }
+ .dataTables_info, #stocksTable_paginate .paginate_button, #stocksTable_paginate .ellipsis, #stocksTable_length, #stocksTable_filter {
+  color:whitesmoke !important;
+ }
+ #stockHoldingsTable_paginate .paginate_button, #stockHoldingsTable_paginate .ellipsis, #stockHoldingsTable_length, #stockHoldingsTable_filter {
+  color:whitesmoke !important;
+ }
+ #stocksTable_paginate .current, #stockHoldingsTable_paginate .current{
+   color:black !important;
+ }
+ .price-col{
+   color:green !important;
+ }
+ .stocks-table-container{
+   background-color: rgba(0, 0, 0, 0.4);
+   width:100%;
+   min-width: fit-content;
+ }
+ #stocksTable tr:hover, #stockHoldingsTable tr:hover{
+   cursor: pointer;
+  background-color: rgb(0, 0, 0) !important;
+ }
+
+ .full-body-loader{
+   height:100vh;
+   width:100vw;
+   background-color: hsla(0, 0%, 0%, 0.3);
+   position: absolute;
+   top: 0;
+   left: 0;
+   display: block;
+   z-index: 9999;
+ }
+
+ .loader-img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  width: 3vw;
+ }
+ 
